@@ -33,19 +33,14 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+
 
 </head>
 
 <body>
 
 <!-- Top menu -->
-<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
+<!--<nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
@@ -56,7 +51,7 @@
             </button>
             <a class="navbar-brand">Yedidim</a>
         </div>
-        <!-- Collect the nav links, forms, and other content for toggling -->
+
         <div class="collapse navbar-collapse" id="top-navbar-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
@@ -77,27 +72,104 @@
             </ul>
         </div>
     </div>
+</nav> -->
+
+<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand page-scroll" href="#">Yedidey Hakfar</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a class="page-scroll" href="#gallery">Gallery</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
 </nav>
 
 <!-- Top content -->
-<div class="top-content">
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-8 col-sm-offset-2 text">
-                    <h1><strong>Yedidim</strong> Registration Form</h1>
-                    <div class="description">
-                        <p>
-                            *About the Program*
-                        </p>
-                    </div>
-                    <div class="top-big-link">
-                        <a class="btn btn-link-2" href="/register">Register</a>
+    <!--<div class="top-content">-->
+            <section>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-8 col-sm-offset-2 text">
+                            <h1><strong>Yedidim</strong> Registration Form</h1>
+                            <div class="description">
+                                <p>
+                                    *About the Program*
+                                </p>
+                            </div>
+                            <div class="top-big-link">
+                                <a class="btn btn-link-2" href="/register">Register</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </section>
+            <section id="gallery">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <h2 class="section-heading">Gallery</h2>
+                            <hr style="background-color: #204d74">
+                        </div>
+                        <div class="carousel slide col-sm-8 col-sm-offset-2" data-ride="carousel" id="myCarousel">
+                            <ol class="carousel-indicators" id="gallery_mini">
+                            </ol>
+                            <div class="carousel-inner" id="images">
+                            </div>
+                            <a href="#myCarousel" class="carousel-control left" data-slide="prev">
+                                <span class="icon-prev"></span>
+                            </a>
+                            <a href="#myCarousel" class="carousel-control right" data-slide="next">
+                                <span class="icon-next"></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    <!--</div>-->
+<script type="text/javascript">
+    var ol = document.getElementById("gallery_mini");
+    var li;
+    var array = [];
+    for (var index = 0;index < 14;index++) {
+        li = document.createElement("li");
+        li.setAttribute("data-target","#myCarousel");
+        li.setAttribute("data-slide-to",String(index));
+        ol.appendChild(li);
+    }
+    ol.firstElementChild.setAttribute("class","active");
 
-</div>
+    var carousel_inner = document.getElementById("images");
+    for (var index = 1;index <= 14;index++) {
+        var div = document.createElement("div");
+        div.setAttribute("class", "item");
+        var image = new Image();
+        image.src="images/"+index+".JPG";
+        image.setAttribute("class","img-responsive");
+        image.setAttribute("alt","greenblitz");
+        div.appendChild(image);
+        carousel_inner.appendChild(div);
+    }
+    carousel_inner.firstElementChild.setAttribute("class", "item active");
+
+</script>
+
+
 
 
 <!-- Javascript -->
