@@ -98,11 +98,10 @@
         </div>
         <div class="col-sm-5 form-box">
           <div class="form-top">
-            <div class="form-top-left">
-              <h3>Sign up now</h3>
-              <p>Fill in the form below to get instant access:</p>
-            </div>
             <div class="form-top-right">
+              <h3 style="direction: rtl">הרשם עכשיו!</h3>
+            </div>
+            <div class="form-top-left">
               <i class="fa fa-pencil"></i>
             </div>
           </div>
@@ -110,15 +109,22 @@
             <form role="form" action="/register" method="post" class="registration-form">
               <div class="form-group">
                 <label class="sr-only" for="firstName">First name</label>
-                <input type="text" name="firstName" placeholder="First name..." class="form-first-name form-control" id="form-first-name">
+                <input type="text" name="firstName" placeholder="שם פרטי..." class="form-first-name form-control" id="form-first-name" style="direction: rtl">
               </div>
               <div class="form-group">
                 <label class="sr-only" for="lastName">Last name</label>
-                <input type="text" name="lastName" placeholder="Last name..." class="form-last-name form-control" id="form-last-name">
+                <input type="text" name="lastName" placeholder="שם משפחה..." class="form-last-name form-control" id="form-last-name" style="direction: rtl">
               </div>
               <div class="form-group">
                 <label class="sr-only" for="email">Email</label>
-                <input type="text" name="email" placeholder="Email..." class="form-email form-control" id="form-email">
+                <input type="text" name="email" placeholder="אימייל..." class="form-email form-control" id="form-email" onclick="flip()" style="direction: rtl">
+              </div>
+              <div class="form-group">
+                <div class="checkbox" style="float:right; margin-right:5px; margin-left:5px;">
+                  <label><input type="checkbox" value="parent" style="float:right;vertical-align:inherit">הורה</label>
+                  <label><input type="checkbox" value="boger">בוגר</label>
+                  <label><input type="checkbox" value="other"> אחר</label>
+                </div>
               </div>
               <div class="form-group">
                 <label class="sr-only" for="form-about-yourself">About yourself</label>
@@ -142,6 +148,18 @@
 <script src="assets/js/jquery.backstretch.min.js"></script>
 <script src="assets/js/retina-1.1.0.min.js"></script>
 <script src="assets/js/scripts.js"></script>
+
+<script>
+  function flip() {
+    console.log("got here");
+    var field = document.getElementById("form-email");
+    //field.removeAttribute("placeholder");
+    if(field.value == ""){
+      field.style.direction = "rlt";
+    }
+    field.style.direction = "ltr";
+  }
+</script>
 
 <!--[if lt IE 10]>
 <script src="assets/js/placeholder.js"></script>

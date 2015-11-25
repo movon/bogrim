@@ -154,15 +154,19 @@ ul.navbar-nav {
 .form-top-left {
 	float: left;
 	width: 75%;
-	padding-top: 25px;
+	padding-top: 5px;
+	font-size: 66px;
+	color: #ddd;
+	line-height: 100px;
+	text-align: left;
 }
 
 .form-top-left h3 { margin-top: 0; }
 
 .form-top-right {
-	float: left;
+	float: right;
 	width: 25%;
-	padding-top: 5px;
+	padding-top: 25px;
 	font-size: 66px;
 	color: #ddd;
 	line-height: 100px;
