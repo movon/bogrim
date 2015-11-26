@@ -44,6 +44,17 @@ img { max-width: 100%; }
 ::selection { background: #19b9e7; color: #fff; text-shadow: none; }
 
 
+.parent-more {
+	transform: scaleX(0);
+	transform-origin: 0% 40%;
+	transition: all .5s ease;
+}
+
+.text {
+	transform: scaleX(1);
+}/*battery almost died ;( */
+
+
 .btn-link-1 {
 	display: inline-block;
 	height: 50px;
@@ -153,7 +164,7 @@ ul.navbar-nav {
 
 .form-top-left {
 	float: left;
-	width: 75%;
+	width: 50%;
 	padding-top: 5px;
 	font-size: 66px;
 	color: #ddd;
@@ -165,7 +176,7 @@ ul.navbar-nav {
 
 .form-top-right {
 	float: right;
-	width: 25%;
+	width: 50%;
 	padding-top: 25px;
 	font-size: 66px;
 	color: #ddd;

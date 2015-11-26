@@ -93,15 +93,15 @@
             </p>
           </div>
           <div class="top-big-link">
-            <a class="btn btn-link-2" href="#">About</a>
+            <a class="btn btn-link-2" href="/">About</a>
           </div>
         </div>
-        <div class="col-sm-5 form-box">
+        <div class="col-sm-5 col-lg-5 form-box">
           <div class="form-top">
-            <div class="form-top-right">
+            <div class="form-top-right" style="width: auto">
               <h3 style="direction: rtl">הרשם עכשיו!</h3>
             </div>
-            <div class="form-top-left">
+            <div class="form-top-left" style="width: auto">
               <i class="fa fa-pencil"></i>
             </div>
           </div>
@@ -121,21 +121,23 @@
               </div>
               <div class="form-group">
                 <div class="checkbox" style="float: right">
-                  הורה
-                  <label><input type="checkbox" value="parent" style="margin-top: 9px"></label>
-                  בוגר
-                  <label><input type="checkbox" value="boger" style="margin-top: 9px"></label>
-                  אחר
+                  <span>הורה</span>
+                  <label><input type="checkbox" value="parent" id="parent" style="margin-top: 9px"></label>
+                  <span>בוגר</span>
+                  <label><input type="checkbox" value="boger" id="boger" style="margin-top: 9px"></label>
+                  <span>אחר</span>
                   <label><input type="checkbox" value="other" style="margin-top: 9px"></label>
-
                 </div>
               </div>
               <div class="form-group">
+                <label id="parent-more"><input type="text" class="form-control parent-more"></label>
+              </div>
+              <div class="form-group">
                 <label class="sr-only" for="form-about-yourself">About yourself</label>
-			                        	<textarea name="about" placeholder="About yourself..."
+			                        	<textarea name="about" placeholder="על עצמך..." style="direction: rtl"
                                                   class="form-about-yourself form-control" id="about"></textarea>
               </div>
-              <button type="submit" class="btn">Sign me up!</button>
+              <button type="submit" class="btn">!הרשם</button>
             </form>
           </div>
         </div>
@@ -155,14 +157,20 @@
 
 <script>
   function flip() {
-    console.log("got here");
     var field = document.getElementById("form-email");
-    //field.removeAttribute("placeholder");
-    if(field.value == ""){
-      field.style.direction = "rlt";
-    }
+    field.removeAttribute("placeholder");
     field.style.direction = "ltr";
   }
+</script>
+<script>
+  $(function(){
+    $("#parent").click(function(){
+      $("#parent-more").toggleClass("text");
+    });
+    $("#boger").click(function(){
+      $("#boger-more").toggleClass("text");
+    });
+  });
 </script>
 
 <!--[if lt IE 10]>
