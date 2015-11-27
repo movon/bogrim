@@ -10,6 +10,13 @@ router.post('/', function(req, res, next) {
     var lastName = req.body.lastName;
     var email = req.body.email;
     var about = req.body.about;
+    var parent = req.body.parent;
+    var kidName = req.body.kidName;
+    var boger = req.body.boger;
+    var yearFinished = req.body.yearFinished;
+    var other = req.body.other;
+    console.log("parent: " + parent + ", kid name: " + kidName + ", boger: " + boger + ", yearFinished: " + yearFinished + ", other: " + other);
+
 
     var nodemailer = require('nodemailer');
 
@@ -42,16 +49,16 @@ router.post('/', function(req, res, next) {
     };
 
     // send mail with defined transport object
-    transporter.sendMail(mailOptions, function(error, info){
+    /*transporter.sendMail(mailOptions, function(error, info){
         if(error) {
             return console.log(error);
         }
         console.log('Message sent: ' + info.response);
 
-    });
+    });*/
 
 
-    res.render('index', { title: 'Express' });
+    //res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
