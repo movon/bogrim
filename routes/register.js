@@ -16,7 +16,9 @@ router.post('/', function(req, res, next) {
     var yearFinished = req.body.yearFinished;
     var other = req.body.other;
     console.log("parent: " + parent + ", kid name: " + kidName + ", boger: " + boger + ", yearFinished: " + yearFinished + ", other: " + other);
-
+    if(typeof boger == "undefined"){
+        console.log("here");
+    }
 
     var nodemailer = require('nodemailer');
 
