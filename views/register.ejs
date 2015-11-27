@@ -119,7 +119,7 @@
                 <label class="sr-only" for="email">Email</label>
                 <input type="text" name="email" placeholder="אימייל..." class="form-email form-control" id="form-email" onclick="flip()" style="direction: rtl">
               </div>
-              <div class="form-group">
+
                 <div class="checkbox" style="float: right">
 
                   <!-- THIS IS BOGER -->
@@ -134,13 +134,13 @@
                   <span>אחר</span>
                   <label><input type="checkbox" value="parent" id="parent" name="parent" onclick="hide();" style="margin-top: 9px"></label>
                 </div>
+              <!-- FOR LATER
+              <div id="hidden-parent" style="float: right; direction: rtl; width: 100%">
+                <label id="hidden-parent-text"  style="float: right"><input type="text" name="kidName" id="kidName"></label>
               </div>
-              <div id="hidden-parent" style="float: right; direction: rtl">
-                <label id="hidden-parent-text" name="kidName"><input type="text" class="form-control"></label>
-              </div>
-              <div id="hidden-boger" style="float:right; direction: rtl">
-                <label id="hidden-boger-text" name="yearFinished"><input type="number" class="form-control"></label>
-              </div>
+              <div id="hidden-boger" style="float:right; direction: rtl; width: 100%">
+                <label id="hidden-boger-text"  style="float: right"><input type="number" class="form-number" name="yearFinished" id="yearFinished"></label>
+              </div>-->
               <div class="form-group">
                 <label class="sr-only" for="form-about-yourself">About yourself</label>
 			                        	<textarea name="about" placeholder="על עצמך..." style="direction: rtl"
@@ -152,6 +152,16 @@
         </div>
       </div>
     </div>
+  </div>
+  <div id="modal" class="popoutContainer"">
+    <header class="popupHeader">
+      <span class="header_title">!תודה על ההרשמה</span>
+    </header>
+    <section class="popupBody">
+      <div>
+        <a href="/"><p style="display: inline">!הכנס עכשיו </p><i class="glyphicon glyphicon-log-in" style="padding-top: 10%"></i></a>
+      </div>
+    </section>
   </div>
 
 </div>
@@ -188,6 +198,11 @@
         $('#hidden-boger').animate({opacity: 0}).slideUp("slow");
       }
     };
+
+  $(document).ready(function (){
+    $('#kidName').prop('required', false);
+    $('#yearFinished').prop('required', false);
+  });
 </script>
 
 <!--[if lt IE 10]>

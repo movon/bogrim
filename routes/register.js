@@ -15,10 +15,32 @@ router.post('/', function(req, res, next) {
     var boger = req.body.boger;
     var yearFinished = req.body.yearFinished;
     var other = req.body.other;
-    console.log("parent: " + parent + ", kid name: " + kidName + ", boger: " + boger + ", yearFinished: " + yearFinished + ", other: " + other);
-    if(typeof boger == "undefined"){
-        console.log("here");
+
+    var mailOptions = {
+        from: 'Registration-Bot<' + process.env.email_username + '>', // sender address
+        to: 'Shiraz<kfaryarok.sheli@gmail.com>', // list of receivers
+        subject: firstName + ' ' + lastName + ' wants to join Yedidey Hakfar!', // Subject line
+        text: 'Hello, a new registrant just signed up to Yedidey Hakfar!' +
+        '\nTheir application was: ' +
+        '\nFirst name: ' + firstName + // plaintext body
+        '\nLast name: ' + lastName +  // plaintext body
+        '\nEmail: ' + email    // plaintext body
+    };
+
+    if(typeof yearFinished != "undefined"){
+        mailOptions.text += '\nBoger in year: ' + yearFinished;
     }
+    if(typeof  kidName != "undefined"){
+        mailOptions.text += '\nParent of child named: ' + kidName;
+    }
+    if(typeof other != "undefined"){
+        mailOptions.text += '\nOther';
+    }
+
+    mailOptions.text +='\nMore about them: ' + about;
+
+    console.log("here");
+    console.log("Mail text: " +mailOptions.text);
 
     var nodemailer = require('nodemailer');
 
@@ -38,17 +60,7 @@ router.post('/', function(req, res, next) {
     // the same transporter object for all e-mails
 
     // setup e-mail data with unicode symbols
-    var mailOptions = {
-        from: 'Registration-Bot<' + process.env.email_username + '>', // sender address
-        to: 'Shiraz<kfaryarok.sheli@gmail.com>', // list of receivers
-        subject: firstName + ' ' + lastName + ' wants to join Yedidey Hakfar!', // Subject line
-        text: 'Hello, a new registrant just signed up to Yedidey Hakfar!' +
-                '\nTheir application was: ' +
-                '\nFirst name: ' + firstName + // plaintext body
-                '\nLast name: ' + lastName +  // plaintext body
-                '\nEmail: ' + email +    // plaintext body
-                '\nMore about them: ' + about      // plaintext body
-    };
+
 
     // send mail with defined transport object
     /*transporter.sendMail(mailOptions, function(error, info){
@@ -60,7 +72,7 @@ router.post('/', function(req, res, next) {
     });*/
 
 
-    //res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
 module.exports = router;
