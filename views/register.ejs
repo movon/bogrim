@@ -124,7 +124,7 @@
 
                   <!-- THIS IS BOGER -->
                   <span>הורה</span>
-                  <label><input type="checkbox" value="boger" id="boger" name="boger" style="margin-top: 9px"></label>
+                  <label><input type="checkbox" value="boger" id="boger" name="boger" onclick="bogerHide();" style="margin-top: 9px"></label>
 
                   <!-- THIS IS OTHER -->
                   <span>בוגר</span>
@@ -132,11 +132,14 @@
 
                   <!-- THIS IS PARENT -->
                   <span>אחר</span>
-                  <label><input type="checkbox" value="parent" id="parent" name="parent" onclick="return hide();" style="margin-top: 9px"></label>
+                  <label><input type="checkbox" value="parent" id="parent" name="parent" onclick="hide();" style="margin-top: 9px"></label>
                 </div>
               </div>
-              <div id="hidden-parent">
+              <div id="hidden-parent" style="float: right; direction: rtl">
                 <label id="hidden-parent-text"><input type="text" class="form-control"></label>
+              </div>
+              <div id="hidden-boger" style="float:right; direction: rtl">
+                <label id="hidden-boger-text"><input type="number" class="form-control"></label>
               </div>
               <div class="form-group">
                 <label class="sr-only" for="form-about-yourself">About yourself</label>
@@ -172,14 +175,19 @@
     function hide() {
       var field = document.getElementById("hidden-parent-text");
       if ($("#parent").is(':checked')) {
-        field.style.display = "";
         $('#hidden-parent').css({opacity:0}).slideDown("slow").animate({opacity:1});
       } else {
-        field.style.display = "none";
         $('#hidden-parent').animate({opacity: 0}).slideUp("slow");
       }
     };
-
+    function bogerHide() {
+      var field = document.getElementById("hidden-boger-text");
+      if ($("#boger").is(':checked')) {
+        $('#hidden-boger').css({opacity:0}).slideDown("slow").animate({opacity:1});
+      } else {
+        $('#hidden-boger').animate({opacity: 0}).slideUp("slow");
+      }
+    };
 </script>
 
 <!--[if lt IE 10]>

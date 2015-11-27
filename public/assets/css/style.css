@@ -46,7 +46,9 @@ img { max-width: 100%; }
 #hidden-parent{
 	display: none;
 }
-
+#hidden-boger{
+	display: none;
+}
 .parent-more {
 	transform: scaleX(0);
 	transform-origin: 0% 40%;
