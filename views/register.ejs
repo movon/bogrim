@@ -121,16 +121,22 @@
               </div>
               <div class="form-group">
                 <div class="checkbox" style="float: right">
+
+                  <!-- THIS IS BOGER -->
                   <span>הורה</span>
-                  <label><input type="checkbox" value="parent" id="parent" style="margin-top: 9px"></label>
+                  <label><input type="checkbox" value="boger" id="boger" name="boger" style="margin-top: 9px"></label>
+
+
                   <span>בוגר</span>
-                  <label><input type="checkbox" value="boger" id="boger" style="margin-top: 9px"></label>
-                  <span>אחר</span>
                   <label><input type="checkbox" value="other" style="margin-top: 9px"></label>
+
+                  <!-- THIS IS PARENT -->
+                  <span>אחר</span>
+                  <label><input type="checkbox" value="parent" id="parent" name="parent" onclick="return hide();" style="margin-top: 9px"></label>
                 </div>
               </div>
-              <div class="form-group">
-                <label id="parent-more"><input type="text" class="form-control parent-more"></label>
+              <div id="hidden-parent">
+                <label id="hidden-parent-text"><input type="text" class="form-control parent-more"></label>
               </div>
               <div class="form-group">
                 <label class="sr-only" for="form-about-yourself">About yourself</label>
@@ -163,14 +169,17 @@
   }
 </script>
 <script>
-  $(function(){
-    $("#parent").click(function(){
-      $("#parent-more").toggleClass("text");
-    });
-    $("#boger").click(function(){
-      $("#boger-more").toggleClass("text");
-    });
-  });
+    function hide() {
+      var field = document.getElementById("hidden-parent-text");
+      if ($("#parent").is(':checked')) {
+        field.style.display = "";
+        $('#hidden-parent').css({opacity:0}).slideDown("slow").animate({opacity:1});
+      } else {
+        field.style.display = "none";
+        $('#hidden-parent').animate({opacity: 0}).slideUp("slow");
+      }
+    };
+
 </script>
 
 <!--[if lt IE 10]>

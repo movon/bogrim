@@ -43,6 +43,9 @@ img { max-width: 100%; }
 ::-moz-selection { background: #19b9e7; color: #fff; text-shadow: none; }
 ::selection { background: #19b9e7; color: #fff; text-shadow: none; }
 
+#hidden-parent{
+	display: none;
+}
 
 .parent-more {
 	transform: scaleX(0);
