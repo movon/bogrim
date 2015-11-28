@@ -55,6 +55,46 @@ img { max-width: 100%; }
 	transition: all .5s ease;
 }
 
+/*register complete*/
+body{
+	font-family: 'Source Sans Pro', sans-serif;
+	font-size: 14px;
+	color: #666;
+}
+#lean_overlay{
+	position:fixed;
+	z-index: 100;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background: #000;
+	display: none;
+}
+.popupContainer{
+	position:absolute;
+	width:330px;
+	height:auto;
+	lef:45%;
+	top: 80px;
+	background: #FFF;
+}
+
+.popupBody{
+	padding: 20px;
+}
+.popupHeader .modal_close{
+	position: absolute;;
+	right: 0;
+	top: 0;
+	padding: 10px 15px;
+	background: #E4E4E2;
+	cursor: pointer;
+	color: #aaa;
+	font-size:16px;
+}
+
+
 .text {
 	transform: scaleX(1);
 }/*battery almost died ;( */
