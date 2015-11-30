@@ -43,26 +43,57 @@
 <nav class="navbar navbar-inverse navbar-no-bg" role="navigation">
     <div class="container">
         <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
             <a class="navbar-brand">Yedidim</a>
         </div>
-
-       <div class="collapse navbar-collapse" id="top-navbar-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li>
+        <div class="collapse navbar-collapse" id="top-navbar-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li>
             <span class="li-social">
-                <a href="/login"><p style="display: inline">!הכנס עכשיו   </p><i class="glyphicon glyphicon-log-in" style="padding-top: 10%"></i></a>
+                <button class = btn btn-primary data-toggle="modal" data-target="#myModal"><p style="display: inline">!הכנס עכשיו   </p><i class="glyphicon glyphicon-log-in" style="padding-top: 10%"></i></button>
             </span>
-        </li>
-      </ul>
-    </div>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel" style="direction:rtl">כניסה</h4>
+            </div>
+
+            <div class="modal-body">
+                <form role="form" action="" method="post">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="uLogin">
+                            <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="uPassword">
+                            <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button class="form-control btn btn-primary" onclick="clicked()"> כנס</button>
+
+            <div class="progress">
+                <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+                    <span class="sr-only">progress</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!--<nav id="mainNav" class="navbar navbar-default navbar-fixed-top">
     <div class="container-fluid">
@@ -87,56 +118,79 @@
 </nav>-->
 
 <!-- Top content -->
-    <!--<div class="top-content">-->
-            <section>
-                <div style="color:#ffffff!important;">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-8 col-sm-offset-2 text">
-                                <h1 style="color:white"><strong>Yedidim</strong> Registration Form</h1>
-                                <div class="description">
-                                    <p align="right">
-                                        עמותת בוגרי וידידי הכפר הירוק לעמן קידומו ופיתוחו של הכפר הירוק שלנו.
-                                        על עמוד הפגישה הבאה יישלח מייל בהמשך
-                                    </p>
-                                </div>
-                                <div class="top-big-link">
-                                    <a class="btn btn-link-2" href="/register">Register</a>
-                                </div>
-                            </div>
-                        </div>
+<!--<div class="top-content">-->
+<section>
+    <div style="color:#ffffff!important;">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-8 col-sm-offset-2 text">
+                    <h1 style="color:white"><strong>Yedidim</strong> Registration Form</h1>
+                    <div class="description">
+                        <p align="right">
+                            עמותת בוגרי וידידי הכפר הירוק לעמן קידומו ופיתוחו של הכפר הירוק שלנו.
+                            על עמוד הפגישה הבאה יישלח מייל בהמשך
+                        </p>
+                    </div>
+                    <div class="top-big-link">
+                        <a class="btn btn-link-2" href="/register">Register</a>
                     </div>
                 </div>
-            </section>
-            <section id="gallery">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-4 col-sm-offset-4">
-                            <h2 class="section-heading" style="color:white">Gallery</h2>
-                            <hr style="background-color: #204d74">
-                        </div>
-                        <div class="carousel slide col-sm-8 col-sm-offset-2" data-ride="carousel" id="myCarousel">
-                            <ol class="carousel-indicators" id="gallery_mini">
-                            </ol>
-                            <div class="carousel-inner" id="images">
-                            </div>
-                            <a href="#myCarousel" class="carousel-control left" data-slide="prev">
-                                <span class="icon-prev"></span>
-                            </a>
-                            <a href="#myCarousel" class="carousel-control right" data-slide="next">
-                                <span class="icon-next"></span>
-                            </a>
-                        </div>
-                    </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4 col-sm-offset-4">
+                <h2 class="section-heading" style="color:white">Gallery</h2>
+                <hr style="background-color: #204d74">
+            </div>
+            <div class="carousel slide col-sm-8 col-sm-offset-2" data-ride="carousel" id="myCarousel">
+                <ol class="carousel-indicators" id="gallery_mini">
+                </ol>
+                <div class="carousel-inner" id="images">
                 </div>
-            </section>
-    <!--</div>-->
+                <a href="#myCarousel" class="carousel-control left" data-slide="prev">
+                    <span class="icon-prev"></span>
+                </a>
+                <a href="#myCarousel" class="carousel-control right" data-slide="next">
+                    <span class="icon-next"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!--</div>-->
+
 <!-- Javascript -->
-<script src="assets/js/jquery-1.11.1.min.js"></script>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-<script src="assets/js/jquery.backstretch.min.js"></script>
-<script src="assets/js/retina-1.1.0.min.js"></script>
-<script src="assets/js/scripts.js"></script>
+
+<!-- login -->
+<script>
+    function clicked(){
+        var button = $(".modal-footer button");
+
+        if(button.attr("data-dissmiss") != "modal"){
+            var inputs = $('form input');
+            var title = $('.modal-title');
+            var progress = $('.progress');
+            var progressBar = $('.progress-bar');
+
+            inputs.attr("disabled", "disabled");
+            button.hide();
+            progress.show();
+            progressBar.animate({width: "100%"}, 100);
+            progress.delay(1000).fadeOut(600);
+
+            button.text("Close").removeClass("btn-primary").
+            addClass("btn-success").blur().delay(1600).fadeIn(function(){
+                title.text("נכנס בהצלחה!");
+                button.attr("data-dismiss", "modal")
+            });
+        }
+    };
+</script>
+
 <script type="text/javascript">
     var ol = document.getElementById("gallery_mini");
     var li;
@@ -161,7 +215,18 @@
         carousel_inner.appendChild(div);
     }
     carousel_inner.firstElementChild.setAttribute("class", "item active");
+
 </script>
+
+
+
+
+<script src="assets/js/jquery-1.11.1.min.js"></script>
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/jquery.backstretch.min.js"></script>
+<script src="assets/js/retina-1.1.0.min.js"></script>
+<script src="assets/js/scripts.js"></script>
+
 <!--[if lt IE 10]>
 <script src="assets/js/placeholder.js"></script>
 <![endif]-->
