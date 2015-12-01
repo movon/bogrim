@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
     mailOptions.text +='\nMore about them: ' + about;
 
     console.log("here");
-    console.log("Mail text: " +mailOptions.text);
+    console.log("Mail text: " + mailOptions.text);
 
     var nodemailer = require('nodemailer');
 
