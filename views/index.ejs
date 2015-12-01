@@ -86,7 +86,7 @@
         <div class="modal-footer">
             <button class="form-control btn btn-primary" onclick="clicked()"> כנס</button>
 
-            <div class="progress">
+            <div class="progress" style="display: none">
                 <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
                     <span class="sr-only">progress</span>
                 </div>
@@ -167,7 +167,7 @@
 
 <!-- login -->
 <script>
-    function clicked(){
+    function accepted() {
         var button = $(".modal-footer button");
 
         if(button.attr("data-dissmiss") != "modal"){
@@ -183,11 +183,40 @@
             progress.delay(1000).fadeOut(600);
 
             button.text("Close").removeClass("btn-primary").
-            addClass("btn-success").blur().delay(1600).fadeIn(function(){
-                title.text("נכנס בהצלחה!");
-                button.attr("data-dismiss", "modal")
-            });
+                    addClass("btn-success").blur().delay(1600).fadeIn(function(){
+                        title.text("נכנס בהצלחה!");
+                        button.attr("data-dismiss", "modal")
+                    });
         }
+    }
+
+    function rejected() {
+        var button = $(".modal-footer button");
+
+        if(button.attr("data-dissmiss") != "modal"){
+            var inputs = $('form input');
+            var title = $('.modal-title');
+            var progress = $('.progress');
+            var progressBar = $('.progress-bar');
+
+            button.hide();
+            progress.show();
+            progressBar.animate({width: "100%"}, 100);
+            progress.delay(1000).fadeOut(600);
+
+            button.text("Close").removeClass("btn-primary").
+                    addClass("btn-danger").blur().delay(1600).fadeIn(function(){
+                        title.text("הפרטים אינם נכונים, אנא נסה שנית");
+                        button.attr("data-dismiss", "modal");
+                    });
+        }
+    }
+
+    function clicked(){
+        var deferred = when.defer();
+        //preform get request with when.js
+        deferred.promise.then(accepted,rejected);
+
     };
 </script>
 
@@ -226,7 +255,9 @@
 <script src="assets/js/jquery.backstretch.min.js"></script>
 <script src="assets/js/retina-1.1.0.min.js"></script>
 <script src="assets/js/scripts.js"></script>
-
+<script>
+    var when = require('when');
+</script>
 <!--[if lt IE 10]>
 <script src="assets/js/placeholder.js"></script>
 <![endif]-->
