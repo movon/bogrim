@@ -4,17 +4,28 @@
 
 var express = require('express');
 var router = express.Router();
+var fname,lname,email,about,full_name;
+
+
 
 router.get('/', function(req, res, next) {
-    res.render('confirm', { title: 'Express', person_full_name: req.body.full_name });
-    var fname = req.query.fname;
-    var lname = req.query.lname;
-    var email = req.query.email;
-    var about = req.query.about;
+    fname = req.query.fname;
+    lname = req.query.lname;
+    email = req.query.email;
+    about = req.query.about;
+    full_name = req.query.full_name;
+    res.render('confirm', { title: 'Express', person_full_name:full_name, failed: false });
 });
 
 router.post('/', function(req,res, next){
-
+    var password = req.body.password;
+    if (password == "alksgjasklfjaksfdjaskfjaksfjaksfjaksfjasfkaj") {
+        //put the guy in db
+    }
+    else {
+        //nope
+    }
+    res.render('confirm', {title: 'Express', person_full_name: full_name, failed: true})
 });
 
 module.exports = router;
