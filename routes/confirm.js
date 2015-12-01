@@ -6,7 +6,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-    res.render('confirm', { title: 'Express' });
+    res.render('confirm', { title: 'Express', person_full_name: req.body.full_name });
     var fname = req.query.fname;
     var lname = req.query.lname;
     var email = req.query.email;
