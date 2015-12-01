@@ -14,18 +14,20 @@ router.get('/', function(req, res, next) {
     email = req.query.email;
     about = req.query.about;
     full_name = req.query.full_name;
-    res.render('confirm', { title: 'Express', person_full_name:full_name, failed: false });
+    res.render('confirm', { title: 'Express', person_full_name:full_name, failed: false, success: false });
 });
 
 router.post('/', function(req,res, next){
     var password = req.body.password;
     if (password == "alksgjasklfjaksfdjaskfjaksfjaksfjaksfjasfkaj") {
         //put the guy in db
+        res.render('confirm', {title: 'Express', person_full_name: full_name, failed: false, success: true})
     }
     else {
         //nope
+        res.render('confirm', {title: 'Express', person_full_name: full_name, failed: true, success: false})
     }
-    res.render('confirm', {title: 'Express', person_full_name: full_name, failed: true})
+
 });
 
 module.exports = router;
