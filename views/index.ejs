@@ -213,11 +213,24 @@
     }
 
     function clicked(){
-        var deferred = when.defer();
+        //var when = require('when');
+        //var http = require('http');
+
+        //var deferred = when.defer();
         //preform get request with when.js
+        http.get('/login?username=' + document.getElementById('uLogin').value + '&password=' + document.getElementById('uPassword').value, function(resource){
+            resource.on('data', function(data) {
+                if (data == 'Accepted') {
+                    deferred.resolve(true);
+                }
+                else {
+                    deferred.reject();
+                }
+            });
+        });
         deferred.promise.then(accepted,rejected);
 
-    };
+    }
 </script>
 
 <script type="text/javascript">
@@ -255,9 +268,6 @@
 <script src="assets/js/jquery.backstretch.min.js"></script>
 <script src="assets/js/retina-1.1.0.min.js"></script>
 <script src="assets/js/scripts.js"></script>
-<script>
-    var when = require('when');
-</script>
 <!--[if lt IE 10]>
 <script src="assets/js/placeholder.js"></script>
 <![endif]-->
