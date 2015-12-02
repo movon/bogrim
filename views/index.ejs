@@ -212,24 +212,35 @@
         }
     }
 
-    function clicked(){
-        //var when = require('when');
-        //var http = require('http');
+    function clicked() {
+        var p = Promise.resolve({
+            then: function(resolve) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (xhttp.readyState == 4 && xhttp.status == 200) {
+                        if (xhttp.responseText == "Accepted") {
+                            resolve(true);
+                        }
+                        else {
+                            resolve(false);
+                        }
+                    }
+                };
 
-        //var deferred = when.defer();
-        //preform get request with when.js
-        http.get('/login?username=' + document.getElementById('uLogin').value + '&password=' + document.getElementById('uPassword').value, function(resource){
-            resource.on('data', function(data) {
-                if (data == 'Accepted') {
-                    deferred.resolve(true);
-                }
-                else {
-                    deferred.reject();
-                }
-            });
+                xhttp.open("GET", "/login?username=" + document.getElementById('uLogin').value + '&password=' + document.getElementById('uPassword').value, true);
+                xhttp.send();
+            }
+        })
+        p.then(function(v) {
+            if (v) {
+                accepted();
+            }
+            else {
+                rejected();
+            }
+        }, function(e) {
+            console.log(e);
         });
-        deferred.promise.then(accepted,rejected);
-
     }
 </script>
 

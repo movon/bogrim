@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
     var username = req.query.username;
     var password = req.query.password;
     //stuff with sql
-    var accepted = true;//later replace it with result of sql
+    var accepted = false;//later replace it with result of sql
     res.writeHead(200,{"Content-Type": "text/plain"});
     if (accepted) {
         res.write('Accepted');
