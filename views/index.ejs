@@ -227,7 +227,9 @@
                     }
                 };
 
-                xhttp.open("GET", "/login?username=" + document.getElementById('uLogin').value + '&password=' + document.getElementById('uPassword').value, true);
+                xhttp.open("GET", "/login?username=" +
+                        document.getElementById('uLogin').value +
+                        '&password=' + document.getElementById('uPassword').value, true);
                 xhttp.send();
             }
         })
