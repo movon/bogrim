@@ -182,11 +182,12 @@
             progressBar.animate({width: "100%"}, 100);
             progress.delay(1000).fadeOut(600);
 
-            button.text("Close").removeClass("btn-primary").
-                    addClass("btn-success").blur().delay(1600).fadeIn(function(){
-                        title.text("נכנס בהצלחה!");
-                        button.attr("data-dismiss", "modal")
-                    });
+            /*button.text("Close").removeClass("btn-primary").
+             addClass("btn-danger").blur().delay(1600).fadeIn(function(){
+             title.text("הפרטים אינם נכונים, אנא נסה שנית");
+             button.attr("data-dismiss", "modal");
+             });*/
+            window.location.replace("http://kfar-yedidim.com");
         }
     }
 
@@ -204,11 +205,14 @@
             progressBar.animate({width: "100%"}, 100);
             progress.delay(1000).fadeOut(600);
 
-            button.text("Close").removeClass("btn-primary").
+            /*button.text("Close").removeClass("btn-primary").
                     addClass("btn-danger").blur().delay(1600).fadeIn(function(){
                         title.text("הפרטים אינם נכונים, אנא נסה שנית");
                         button.attr("data-dismiss", "modal");
-                    });
+                    });*/
+
+            setTimeout(function() {button.show(); }, 1600);
+            //button.show();
         }
     }
 
