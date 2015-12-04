@@ -24,7 +24,8 @@ router.post('/', function(req, res, next) {
         '\nTheir application was: ' +
         '\nFirst name: ' + firstName + // plaintext body
         '\nLast name: ' + lastName +  // plaintext body
-        '\nEmail: ' + email    // plaintext body
+        '\nEmail: ' + email +   // plaintext body
+        '\nTo confirm him: http://www.kfar-yedidim.com/confirm?username=' + firstName + lastName[0] + '&email=' + email
     };
 
     if(typeof yearFinished != "undefined"){
@@ -63,16 +64,16 @@ router.post('/', function(req, res, next) {
 
 
     // send mail with defined transport object
-    /*transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function(error, info){
         if(error) {
             return console.log(error);
         }
         console.log('Message sent: ' + info.response);
 
-    });*/
+    });
 
 
-    //res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express' });
 });
 
 module.exports = router;

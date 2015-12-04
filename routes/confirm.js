@@ -4,32 +4,22 @@
 
 var express = require('express');
 var router = express.Router();
-var fname,lname,email,about,full_name;
+var full_name;
 
 
 
 router.get('/', function(req, res, next) {
-    var connection = mysql.createConnection({
-            host: 'aaapn5ty4f35zv.cf7gzy2xliu4.us-west-2.rds.amazonaws.com',
-            port: '3306',
-            user: 'kfarsqlyedidim',
-            password: 'Movkfar25.11yarokon162015!',
-            database: 'innodb',
-        }
-    );
-
-    fname = req.query.fname;
-    lname = req.query.lname;
-    email = req.query.email;
-    about = req.query.about;
-    full_name = req.query.full_name;
-    res.render('confirm', { title: 'Express', person_full_name:full_name, failed: false, success: false });
+    var oldEmail = req.query.email;
+    var newEmail = req.query.username + '@kfar-yedidim.com';
+    res.render('confirm', { title: 'Express', oldEmail:oldEmail, newEmail: newEmail, failed: false, success: false });
 });
 
-router.post('/', function(req,res, next){
+router.post('/', function(req,res, next) {
     var password = req.body.password;
-    if (password == "alksgjasklfjaksfdjaskfjaksfjaksfjaksfjasfkaj") {
-
+    var oldEmail = req.body.oldEmail;
+    var newEmail = req.body.newEmail;
+    if (password == process.env.shiraz_password) {
+        // TODO: INSERT OLDEMAIL=NEWEMAIL INTO TABLE.
         var queryString = "SELECT Password,salt FROM innodb.Users WHERE Username = "
             + connection.escape(username);
         connection.query(queryString, function(err, result){
