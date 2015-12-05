@@ -39,7 +39,7 @@ router.post('/', function(req, res, next) {
     //TODO: HOW TO CREATE A PASSWORD
     mailOptions.text += '\nMore about them: ' + about;
     mailOptions.text += '\nTo confirm him: http://www.kfar-yedidim.com/confirm?Fname=' + firstName +
-                '&Lname=' + lastName + '&email=' + email + '&password=' + password;
+                '&Lname=' + lastName + '&email=' + email + '&password=' + req.body.password;
 
     console.log("here");
     console.log("Mail text: " + mailOptions.text);
