@@ -24,8 +24,7 @@ router.post('/', function(req, res, next) {
         '\nTheir application was: ' +
         '\nFirst name: ' + firstName + // plaintext body
         '\nLast name: ' + lastName +  // plaintext body
-        '\nEmail: ' + email +   // plaintext body
-        '\nTo confirm him: http://www.kfar-yedidim.com/confirm?username=' + firstName + lastName[0] + '&email=' + email
+        '\nEmail: ' + email  // plaintext body
     };
 
     if(typeof yearFinished != "undefined"){
@@ -38,7 +37,8 @@ router.post('/', function(req, res, next) {
         mailOptions.text += '\nOther';
     }
 
-    mailOptions.text +='\nMore about them: ' + about;
+    mailOptions.text += '\nMore about them: ' + about;
+    mailOptions.text += '\nTo confirm him: http://www.kfar-yedidim.com/confirm?username=' + firstName + lastName[0] + '&email=' + email;
 
     console.log("here");
     console.log("Mail text: " + mailOptions.text);

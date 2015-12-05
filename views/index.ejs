@@ -127,7 +127,8 @@
                     <h1 style="color:white"><strong>Yedidim</strong> Registration Form</h1>
                     <div class="description">
                         <p align="right">
-                            עמותת בוגרי וידידי הכפר הירוק לעמן קידומו ופיתוחו של הכפר הירוק שלנו.
+                             <p style="font-size:120%">עמותת בוגרי וידידי הכפר הירוק לעמן קידומו ופיתוחו של הכפר הירוק שלנו</p>
+                            </br>
                             על עמוד הפגישה הבאה יישלח מייל בהמשך
                         </p>
                     </div>
@@ -211,7 +212,8 @@
                         button.attr("data-dismiss", "modal");
                     });*/
 
-            setTimeout(function() {button.show(); }, 1600);
+            setTimeout(function() {button.show(); progressBar.attr("style", "width: 0");title.text("הפרטים אינם נכונים, אנא נסה שנית")}, 1600);
+
             //button.show();
         }
     }

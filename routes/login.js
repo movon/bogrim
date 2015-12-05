@@ -13,11 +13,11 @@ router.get('/', function(req, res, next) {
     //stuff with sql
 
     var connection = mysql.createConnection({
-        host: 'aaapn5ty4f35zv.cf7gzy2xliu4.us-west-2.rds.amazonaws.com', //TODO: process.env.sqlhost
-        port: '3306', //TODO: process.env.sqlport
-        user: 'kfarsqlyedidim', //TODO: process.env.sqlusername
-        password: 'Movkfar25.11yarokon162015!', //TODO: process.env.sqlpassword
-        database: 'innodb' //TODO: process.env.dbname
+        host: process.env.sqlhost,
+        port: process.env.sqlport,
+        user: process.env.sqlusername,
+        password: process.env.sqlpassword,
+        database: process.env.dbname
         }
     );
     //setup password hash
