@@ -36,9 +36,10 @@ router.post('/', function(req, res, next) {
     if(typeof other != "undefined"){
         mailOptions.text += '\nOther';
     }
-
+    //TODO: HOW TO CREATE A PASSWORD
     mailOptions.text += '\nMore about them: ' + about;
-    mailOptions.text += '\nTo confirm him: http://www.kfar-yedidim.com/confirm?username=' + firstName + lastName[0] + '&email=' + email;
+    mailOptions.text += '\nTo confirm him: http://www.kfar-yedidim.com/confirm?Fname=' + firstName +
+                '&Lname=' + lastName + '&email=' + email + '&password=' + password;
 
     console.log("here");
     console.log("Mail text: " + mailOptions.text);

@@ -5,14 +5,13 @@
 var express = require('express');
 var router = express.Router();
 var ejs = require('ejs');
-var person_full_name = "";
 
+var firstName;
+var lastName;
 
 router.get('/', function(req, res, next) {
-    person_full_name= req.query.username;
-    console.log(person_full_name)
     var oldEmail = req.query.email;
-    var newEmail = person_full_name + '@kfar-yedidim.com';
+    var newEmail = req.query.Fname + req.query.Lname[0] + '@kfar-yedidim.com';
     res.render('confirm', { title: 'Express', oldEmail:oldEmail, newEmail: newEmail, failed: false, success: false });
 });
 
@@ -25,16 +24,14 @@ router.post('/', function(req,res, next) {
             database: process.env.dbname
         }
     );
-
+    //TODO: HOW TO CREATE A PASSWORD
     var password = req.body.password;
     var oldEmail = req.body.oldEmail;
     var newEmail = req.body.newEmail;
     if (password == process.env.shiraz_password) {
-        // TODO: INSERT OLDEMAIL=NEWEMAIL INTO TABLE.
-        var queryString = "SELECT Password,salt FROM innodb.Users WHERE Username = "
-            + connection.escape(username);
-        connection.query(queryString, function(err, result){
-            console.log(result);
+        var queryString = 'INSERT INTO ' + process.env.dbname + '.' + process.env.tablename +
+            '(Fname, Lname, FakeEmail, RealEmail, pass, Salt, Username) VALUES(' + firsName+
+                ', '+ lastName + ', ' + oldEmail + ', ' + newEmail + ', ' +
         });
         //put the guy in db
         res.render('confirm', {title: 'Express', person_full_name: full_name, failed: false, success: true})
