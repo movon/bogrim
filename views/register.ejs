@@ -117,7 +117,7 @@
               </div>
               <div class="form-group">
                 <label class="sr-only" for="password">password</label>
-                <input type="password" name="password" placeholder="סיסמא..." class="form-password form-control" id="form-password">
+                <input type="password" required name="password" placeholder="סיסמא..." class="form-password form-control" id="form-password">
               </div>
 
                 <div class="checkbox" style="float: right">
@@ -158,7 +158,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header" style="padding-bottom:5%">
-          <h4 class="modal-title" style="direction: rtl; float:right; padding-bottom: 10%;">!תודה על ההרשמה</h4>
+          <h4 class="modal-title" style="direction: rtl; float:right; padding-bottom: 10%;">ההרשמה נכשלה</h4>
         </div>
         <div class="modal-body">
           <p style=";line-height: 100%;float: right">וודא שרשמת הכל כדי שההרשמה תתקבל</p>
@@ -181,9 +181,12 @@
 
 <script>
   function thanks() {
-
-        $("#myModal").modal({backdrop: "true"});
-
+  $("#myModal").modal({backdrop: "true"});
+    return validateEmail(document.getElementById('form-email').value);
+  }
+  function validateEmail(email) {
+    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+    return re.test(email);
   }
 
   $(function(){
@@ -212,7 +215,7 @@
         $('#hidden-parent').animate({opacity: 0}).slideUp("slow");
         $('#kidName').attr('type', '');
       }
-    };
+    }
     function bogerHide() {
       var field = document.getElementById("hidden-boger-text");
       if ($("#boger").is(':checked')) {
@@ -222,7 +225,7 @@
         $('#hidden-boger').animate({opacity: 0}).slideUp("slow");
         $('#yearFinished').attr('type', '');
       }
-    };
+    }
 
   $(document).ready(function (){
     $('#kidName').prop('required', false);
