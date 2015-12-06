@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var crypto = require('crypto');
 
 router.get('/', function(req, res, next) {
     res.render('register', { title: 'Express' });
@@ -15,10 +16,11 @@ router.post('/', function(req, res, next) {
     var boger = req.body.boger;
     var yearFinished = req.body.yearFinished;
     var other = req.body.other;
+    var password = req.body.password;
 
     var mailOptions = {
         from: 'Registration-Bot<' + process.env.email_username + '>', // sender address
-        to: 'Shiraz<kfaryarok.sheli@gmail.com>', // list of receivers
+        to: 'Roy<roy.shulman@gmail.com>', // list of receivers
         subject: firstName + ' ' + lastName + ' wants to join Yedidey Hakfar!', // Subject line
         text: 'Hello, a new registrant just signed up to Yedidey Hakfar!' +
         '\nTheir application was: ' +
@@ -36,10 +38,20 @@ router.post('/', function(req, res, next) {
     if(typeof other != "undefined"){
         mailOptions.text += '\nOther';
     }
-    //TODO: HOW TO CREATE A PASSWORD
+
+    //hashing the password
+    var salt = crypto.randomBytes(32).toString('hex');
+    var saltpassword = password + salt;
+    var hashedpassword = crypto.createHash('md5').update(saltpassword).digest('hex');
+
     mailOptions.text += '\nMore about them: ' + about;
-    mailOptions.text += '\nTo confirm him: http://www.kfar-yedidim.com/confirm?Fname=' + firstName +
-                '&Lname=' + lastName + '&email=' + email + '&password=' + req.body.password;
+    mailOptions.text += '\nTo confirm him: http://www.kfar-yedidim.com/confirm?' +
+        'firstName=' + firstName +
+        '&lastName=' + lastName +
+        '&email=' + email +
+        '&password=' + req.body.password +
+        '&hashedpass=' + hashedpassword +
+        '&salt=' + salt;
 
     console.log("here");
     console.log("Mail text: " + mailOptions.text);

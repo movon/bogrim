@@ -102,7 +102,7 @@
             </div>
           </div>
           <div class="form-bottom">
-            <form role="form" action="/register" method="post" class="registration-form" onsubmit="return thanks()">
+            <form role="form" action="/register" method="post" class="registration-form" onsubmit="return thanks()" id="registerForm">
               <div class="form-group">
                 <label class="sr-only" for="firstName">First name</label>
                 <input type="text" name="firstName" placeholder="שם פרטי..." class="form-first-name form-control" id="form-first-name" style="direction: rtl">
@@ -134,13 +134,13 @@
                   <span>אחר</span>
                   <label><input type="checkbox" value="parent" id="parent" name="parent" onclick="hide();" style="margin-top: 9px"></label>
                 </div>
-              <!-- FOR LATER
+
               <div id="hidden-parent" style="float: right; direction: rtl; width: 100%">
-                <label id="hidden-parent-text"  style="float: right"><input type="text" name="kidName" id="kidName"></label>
+                <label id="hidden-parent-text"  style="float: right"><input type="" name="kidName" id="kidName"></label>
               </div>
               <div id="hidden-boger" style="float:right; direction: rtl; width: 100%">
-                <label id="hidden-boger-text"  style="float: right"><input type="number" class="form-number" name="yearFinished" id="yearFinished"></label>
-              </div>-->
+                <label id="hidden-boger-text"  style="float: right"><input type="" class="form-number" name="yearFinished" id="yearFinished"></label>
+              </div>
               <div class="form-group">
                 <label class="sr-only" for="form-about-yourself">About yourself</label>
 			                        	<textarea name="about" placeholder="על עצמך..." style="direction: rtl"
@@ -180,10 +180,21 @@
 
 
 <script>
-  function thanks(){
+  function thanks() {
+
         $("#myModal").modal({backdrop: "true"});
 
   }
+
+  $(function(){
+    $('#registerForm').on('keyup keypress', function(e) {
+      var code = e.keyCode || e.which;
+      if (code == 13) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  });
 
   function flip() {
     var field = document.getElementById("form-email");
@@ -196,16 +207,20 @@
       var field = document.getElementById("hidden-parent-text");
       if ($("#parent").is(':checked')) {
         $('#hidden-parent').css({opacity:0}).slideDown("slow").animate({opacity:1});
+        $('#kidName').attr('type', 'text')
       } else {
         $('#hidden-parent').animate({opacity: 0}).slideUp("slow");
+        $('#kidName').attr('type', '');
       }
     };
     function bogerHide() {
       var field = document.getElementById("hidden-boger-text");
       if ($("#boger").is(':checked')) {
         $('#hidden-boger').css({opacity:0}).slideDown("slow").animate({opacity:1});
+        $('#yearFinished').attr('type', 'text');
       } else {
         $('#hidden-boger').animate({opacity: 0}).slideUp("slow");
+        $('#yearFinished').attr('type', '');
       }
     };
 
