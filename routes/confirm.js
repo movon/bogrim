@@ -59,6 +59,10 @@ router.post('/', function(req,res, next) {
             console.log(result);
         });
 
+        // Send him an email: Congratulations {username}
+        // You have been confirmed and are now registered to yedidey hakfar.
+        // your email is {email}
+
         res.redirect('/');
     }
     else {
