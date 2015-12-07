@@ -29,13 +29,13 @@ router.post('/', function(req, res, next) {
         '\nEmail: ' + email  // plaintext body
     };
 
-    if(typeof yearFinished != "undefined"){
+    if(yearFinished) {
         mailOptions.text += '\nBoger in year: ' + yearFinished;
     }
-    if(typeof  kidName != "undefined"){
+    if(kidName) {
         mailOptions.text += '\nParent of child named: ' + kidName;
     }
-    if(typeof other != "undefined"){
+    if(other){
         mailOptions.text += '\nOther';
     }
 

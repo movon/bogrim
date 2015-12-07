@@ -55,7 +55,10 @@ router.post('/', function(req,res, next) {
 
         console.log(queryString);
 
-        //put the guy in db
+        connection.query(queryString, function(err, result){
+            console.log(result);
+        });
+
         res.redirect('/');
     }
     else {
