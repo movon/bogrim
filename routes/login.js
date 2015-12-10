@@ -21,29 +21,37 @@ router.get('/', function(req, res, next) {
         }
     );
     //setup password hash
-    var salt = crypto.randomBytes(32).toString('hex');
-    var queryString = "SELECT Password,salt FROM innodb.Users WHERE Username = "
+    var queryString = "SELECT * FROM Users WHERE Username = "
         + connection.escape(username);
     var accepted = false;
+
     connection.query(queryString, function(err, result){
-        console.log(result);
+        console.log('result: ' + result);
         if (result) {
-            var salt = result[1];
+            var salt = result[0].salt;
             var saltpassword = password + salt;
             var hashedPassword = crypto.createHash('md5').update(saltpassword).digest('hex');
-            accepted = result[0] == hashedPassword;
+            console.log(saltpassword);
+            console.log('hashed:' + hashedPassword);
+            accepted = result[0].Pass == hashedPassword;
+            if (accepted) {
+                res.write('Accepted');
+                req.session.userName = username;
+                req.session.firstName = result[0].Fname;
+                req.session.lastName = result[0].Lname;
+                req.session.fakeEmail = result[0].FakeEmail;
+                req.session.realEmail = result[0].RealEmail;
+            }
+            else {
+                res.write('Not-Accepted');
+            }
         }
+
+
+        res.end();
     });
-
     //res.writeHead(200,{"Content-Type": "text/plain"});
-    if (accepted) {
-        res.write('Accepted');
-    }
-    else {
-        res.write('Not-Accepted');
-    }
 
-    res.end();
 });
 
 module.exports = router;

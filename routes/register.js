@@ -20,7 +20,7 @@ router.post('/', function(req, res, next) {
 
     var mailOptions = {
         from: 'Registration-Bot<' + process.env.email_username + '>', // sender address
-        to: 'Roy<roy.shulman@gmail.com>', // list of receivers
+        to: 'Tal<talbor49@gmail.com>', // list of receivers
         subject: firstName + ' ' + lastName + ' wants to join Yedidey Hakfar!', // Subject line
         text: 'Hello, a new registrant just signed up to Yedidey Hakfar!' +
         '\nTheir application was: ' +
@@ -49,7 +49,6 @@ router.post('/', function(req, res, next) {
         'firstName=' + firstName +
         '&lastName=' + lastName +
         '&email=' + email +
-        '&password=' + req.body.password +
         '&hashedpass=' + hashedpassword +
         '&salt=' + salt;
 
