@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     var lastName = req.query.lastName;
     var hashedpass = req.query.hashedpass;
     var salt = req.query.salt;
-    var newEmail = firstName + lastName[0] + '@kfar-yedidim.com';
+    var newEmail = firstName.substring(0, firstName.index(' ')) + lastName[0] + '@kfar-yedidim.com';
     res.render('confirm', { title: 'Express', firstName: firstName,
         lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
         hashedpass: hashedpass, salt: salt, failed: false, success: false });
@@ -34,7 +34,6 @@ router.post('/', function(req,res, next) {
     );
     console.log(req.body);
     var password = req.body.password;
-    var userPassword = req.body.userPassword;
     var oldEmail = req.body.oldEmail;
     var newEmail = req.body.newEmail;
     var firstName = req.body.firstName;
