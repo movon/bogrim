@@ -18,19 +18,20 @@ router.get('/', function(req, res, next) {
         }
     );
     var queryString = 'SELECT * FROM ' + process.env.dbname + '.' + process.env.tablename;
-    connection.query(queryString, function(err, rows){
-      if(!err){
-        var userTable = '<thead><tr><th>שם פרטי</th><th>שם משפחה</th><th>אימייל</th></tr></thead>';
-        for(var i = 0;i < rows.rows.length; i++){
-          userTable += '<tr>';
-          for(var key in rows.rows[i]){
-            userTable += '<td>'+ rows.rows[i][key] +'</td>';
+    connection.query(queryString, function(err, rows) {
+      if(!err) {
+          var userTable = '<thead><tr><th>First name</th><th>Last Name</th><th>Email</th></tr></thead>';
+          for (var i = 0; i < rows.length; i++) {
+              userTable += '<tr>';
+              for (var key in rows[i]) {
+                  userTable += '<td>' + rows[i][key] + '</td>';
+              }
+              userTable += '</tr>'
           }
-          userTable += '</tr>'
-        }
       }
+      res.render('users', { title: 'express', userTable: userTable });
     });
-    res.render('users', { title: 'express', userTable: userTable });
+
   //}
 });
 
