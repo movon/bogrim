@@ -8,6 +8,7 @@ var ejs = require('ejs');
 var mysql = require('mysql');
 var validator = require("email-validator");
 var aws = require('aws-sdk');
+aws.config.region = 'us-west-2';
 var ses = new aws.SES();
 
 
@@ -63,7 +64,7 @@ router.post('/', function(req,res, next) {
     var sentResponse = false;
     if (password == process.env.shirazpassword) {
         var queryString_checkUsername = 'SELECT * FROM ' + process.env.dbname
-            + ' WHERE FakeEmail = ' + connection.escape(newEmail);
+            + ' WHERE RealEmail = ' + connection.escape(newEmail);
 
         connection.query(queryString_checkUsername, function(err, result){
             if(result && result.length) {

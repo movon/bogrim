@@ -7,12 +7,12 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var crypto = require('crypto');
 
-
 var routes = require('./routes/index');
 var register = require('./routes/register');
 var users = require('./routes/users');
 var confirm = require('./routes/confirm');
 var login = require('./routes/login');
+var logout = require('./routes/logout');
 
 var app = express();
 
@@ -43,6 +43,7 @@ app.use('/users', users);
 app.use('/confirm', confirm);
 app.use('/login', login);
 app.use('/users', users);
+app.use('/logout', logout);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -82,7 +83,7 @@ getExtra = function(req) {
   // If logged in
   if (req.session.userName) {
     xtra += '<li><a href="/users">Members</a></li>';
-    xtra += '<li><a href="/logut">Logout</a></li>';
+    xtra += '<li><a href="/logout">Logout</a></li>';
   }
   else {
     xtra += '<li><a href="/register">Register</a></li>';
