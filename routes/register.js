@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
 
     var mailOptions = {
         from: 'Registration-Bot<' + process.env.email_username + '>', // sender address
-        to: 'Tal<talbor49@gmail.com>', // list of receivers
+        to: 'Shiraz<kfaryarok.sheli@gmail.com>', // list of receivers
         subject: firstName + ' ' + lastName + ' wants to join Yedidey Hakfar!', // Subject line
         text: 'Hello, a new registrant just signed up to Yedidey Hakfar!' +
         '\nTheir application was: ' +
