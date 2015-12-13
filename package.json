@@ -15,6 +15,7 @@
     "when": "3.7.5",
     "mysql": "2.9.0",
     "express-session": "*",
-    "email-validator": "*"
+    "email-validator": "*",
+    "aws-sdk": "*"
   }
 }

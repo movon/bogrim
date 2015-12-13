@@ -18,6 +18,11 @@ router.post('/', function(req, res, next) {
     var other = req.body.other;
     var password = req.body.password;
 
+    firstName = firstName.replace(/ /g, '_');
+    firstName = firstName.replace(/"/g, '');
+    lastName = lastName.replace(/ /g, '_');
+    lastName = lastName.replace(/"/g, '');
+
     var mailOptions = {
         from: 'Registration-Bot<' + process.env.email_username + '>', // sender address
         to: 'Tal<talbor49@gmail.com>', // list of receivers

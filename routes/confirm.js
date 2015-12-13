@@ -7,6 +7,9 @@ var router = express.Router();
 var ejs = require('ejs');
 var mysql = require('mysql');
 var validator = require("email-validator");
+var aws = require('aws-sdk');
+var ses = new aws.SES();
+
 
 var firstName;
 var lastName;
@@ -17,13 +20,17 @@ router.get('/', function(req, res, next) {
     var lastName = req.query.lastName;
     var hashedpass = req.query.hashedpass;
     var salt = req.query.salt;
-    if(firstName.indexOf(' ') != -1) {
-        firstName = firstName.substring(0, firstName.indexOf(' '));
+    firstName = firstName.trim();
+    firstName = firstName.replace(/^_+|_+$/g,'');
+    lastName = lastName.trim();
+    lastName = lastName.replace(/^_+|_+$/g,'');
+    if(firstName.indexOf('_') != -1) {
+        firstName = firstName.substring(0, firstName.indexOf('_'));
     }
     var newEmail = firstName + lastName[0] + '@kfar-yedidim.com';
     res.render('confirm', { title: 'Express', firstName: firstName,
         lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
-        hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: '' , extra: getExtra()});
+        hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: '' , extra: getExtra(req)});
 });
 
 router.post('/', function(req,res, next) {
@@ -54,12 +61,12 @@ router.post('/', function(req,res, next) {
 
 
     var sentResponse = false;
-    if (password == process.env.shiraz_password) {
+    if (password == process.env.shirazpassword) {
         var queryString_checkUsername = 'SELECT * FROM ' + process.env.dbname
             + ' WHERE FakeEmail = ' + connection.escape(newEmail);
 
-        connection.query(queryString, function(err, result){
-            if(result.length) {
+        connection.query(queryString_checkUsername, function(err, result){
+            if(result && result.length) {
                 errorMsg = 'Email already taken.';
                 res.render('confirm', { title: 'Express', firstName: firstName,
                     lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
@@ -87,6 +94,13 @@ router.post('/', function(req,res, next) {
         connection.query(queryString, function(err, result){
             console.log(result);
         });
+
+
+        ses.verifyEmailAddress(params, function(err, data) {
+            if (err) console.log(err, err.stack); // an error occurred
+            else     console.log(data);           // successful response
+        });
+
 
         // Send him an email: Congratulations {username}
         // You have been confirmed and are now registered to yedidey hakfar.
