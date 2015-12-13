@@ -56,15 +56,24 @@
                             <i class="fa fa-pencil"></i>
                         </div>
                     </div>
-                    <h1 style="color: red"> <%= errorMsg %> </h1>
+                    <div style="background: rgba(128, 128, 128, 0.5)">
+                    <h1 style="color: yellow; font-weight: bold"> <%= errorMsg %> </h1>
+                    </div>
                         <form role="form" method="post" action="">
                             <div class="form-group">
-                                <label for="adminPassword">Admin Password</label>
-                                <input type="password" class="form-control form-password" id="password" name="password" placeholder="admin password...">
-                                <input name="oldEmail" value="<%= oldEmail%>"/>
-                                <input name="newEmail" value="<%= newEmail%>"/>
-                                <input name="firstName" value="<%= firstName%>"/>
-                                <input name="lastName" value="<%= lastName%>"/>
+                                <div style="background: rgba(128, 128, 128, 0.5);">
+                                <label for="adminPassword" style="color: #f7ecb5">Admin Password</label>
+                                </div>
+                                <input style="margin-bottom: 3%;" type="password" class="form-control form-password" id="password" name="password" placeholder="admin password...">
+
+                                <input id="popoverData1" class="btn" data-content="Original email" rel="popover" data-placement="bottom" data-trigger="hover"
+                                        style="margin-bottom: 3%; margin-left: 2%;" name="oldEmail" value="<%= oldEmail%>"/>
+                                <input id="popoverData2" class="btn" data-content="New email" rel="popover" data-placement="bottom" data-trigger="hover"
+                                        style="margin-bottom: 3%; margin-left: 2%;" name="newEmail" value="<%= newEmail%>"/>
+                                <input id="popoverData3" class="btn" data-content="First Name" rel="popover" data-placement="bottom" data-trigger="hover"
+                                        style="margin-bottom: 3%; margin-left: 2%;" name="firstName" value="<%= firstName%>"/>
+                                <input id="popoverData4" class="btn" data-content="Last Name" rel="popover" data-placement="bottom" data-trigger="hover"
+                                        style="margin-bottom: 3%; margin-left: 2%;" name="lastName" value="<%= lastName%>"/>
                                 <input style="display: none" name="userPassword" value="<%= hashedpass%>"/>
                                 <input style="display: none" name="salt" value="<%= salt%>"/>
                             </div>
@@ -115,6 +124,10 @@
     }
 </script>
 <script>
+    $('#popoverData1').popover();
+    $('#popoverData2').popover();
+    $('#popoverData3').popover();
+    $('#popoverData4').popover();
     function hide() {
         var field = document.getElementById("hidden-parent-text");
         if ($("#parent").is(':checked')) {

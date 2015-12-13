@@ -27,8 +27,8 @@ router.get('/', function(req, res, next) {
 
     connection.query(queryString, function(err, result){
         console.log('result: ' + result);
-        if (result) {
-            var salt = result[0].salt;
+        if (result && result.length > 0) {
+            var salt = result[0].Salt;
             var saltpassword = password + salt;
             var hashedPassword = crypto.createHash('md5').update(saltpassword).digest('hex');
             console.log(saltpassword);

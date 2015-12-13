@@ -6,6 +6,7 @@ var express = require('express');
 var router = express.Router();
 var ejs = require('ejs');
 var mysql = require('mysql');
+var validator = require("email-validator");
 
 var firstName;
 var lastName;
@@ -16,7 +17,10 @@ router.get('/', function(req, res, next) {
     var lastName = req.query.lastName;
     var hashedpass = req.query.hashedpass;
     var salt = req.query.salt;
-    var newEmail = firstName.substring(0, firstName.indexOf(' ')) + lastName[0] + '@kfar-yedidim.com';
+    if(firstName.indexOf(' ') != -1) {
+        firstName = firstName.substring(0, firstName.indexOf(' '));
+    }
+    var newEmail = firstName + lastName[0] + '@kfar-yedidim.com';
     res.render('confirm', { title: 'Express', firstName: firstName,
         lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
         hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: '' });
@@ -40,11 +44,33 @@ router.post('/', function(req,res, next) {
     var hashedpass = req.body.userPassword;
     var salt = req.body.salt;
 
+    if(!validator.validate(newEmail)) {
+        errorMsg = 'Email is not valid. check that it doesn\'t contain hebrew letters';
+        res.render('confirm', { title: 'Express', firstName: firstName,
+            lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
+            hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg});
+        return;
+    }
 
+
+    var sentResponse = false;
     if (password == process.env.shiraz_password) {
         var queryString_checkUsername = 'SELECT * FROM ' + process.env.dbname
-            + ' WHERE Username = ' + connection.escape(connection.escape(firstName + lastName[0]));
+            + ' WHERE FakeEmail = ' + connection.escape(newEmail);
 
+        connection.query(queryString, function(err, result){
+            if(result.length) {
+                errorMsg = 'Email already taken.';
+                res.render('confirm', { title: 'Express', firstName: firstName,
+                    lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
+                    hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg});
+                sentResponse = true;
+            }
+        });
+
+        if (sentResponse) {
+            return;
+        }
 
         var queryString = 'INSERT INTO ' + process.env.dbname + '.' + process.env.tablename +
             '(Fname, Lname, FakeEmail, RealEmail, pass, Salt, Username) VALUES('
@@ -86,7 +112,10 @@ module.exports = router;
 
 
 
-
+function validateEmail(email) {
+    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+}
 
 
 

@@ -5,10 +5,10 @@ var mysql = require('mysql');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
-  /*if(req.session.firstName === undefined){
-    res.redirect('/');
-  }*/
-  //else{
+    if(!req.session.userName) {
+        res.redirect('/');
+        return;
+    }
     var connection = mysql.createConnection({
           host: process.env.sqlhost,
           port: process.env.sqlport,
@@ -20,13 +20,19 @@ router.get('/', function(req, res, next) {
     var queryString = 'SELECT * FROM ' + process.env.dbname + '.' + process.env.tablename;
     connection.query(queryString, function(err, rows) {
       if(!err) {
-          var userTable = '<thead><tr><th>First name</th><th>Last Name</th><th>Email</th></tr></thead>';
+          var userTable = '<thead>' +
+              '<tr><td style="font-weight:bold; font-size:23px">First name</td>' +
+              '<td style="font-weight:bold; font-size:23px">Last Name</td>' +
+              '<td style="font-weight:bold; font-size:23px">Email</td></tr>' +
+              '</thead>';
           for (var i = 0; i < rows.length; i++) {
               userTable += '<tr>';
-              for (var key in rows[i]) {
-                  userTable += '<td>' + rows[i][key] + '</td>';
-              }
-              userTable += '</tr>'
+
+              userTable += '<td>' + rows[i].Fname + '</td>';
+              userTable += '<td>' + rows[i].Lname + '</td>';
+              userTable += '<td>' + rows[i].FakeEmail + '</td>';
+
+              userTable += '</tr>';
           }
       }
       res.render('users', { title: 'express', userTable: userTable });

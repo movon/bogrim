@@ -75,6 +75,21 @@ app.use(function(err, req, res, next) {
   });
 });
 
+getExtra = function() {
+  var xtra = '';
+
+  if (req.session.userName) {
+    //give him logout button
+    //give him /users page
+  }
+  else {
+    //give him register
+    //give him login
+  }
+
+  return xtra;
+};
+
 var http = require('http');
 
 /**
