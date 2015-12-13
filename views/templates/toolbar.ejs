@@ -11,6 +11,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" style="color: green" href="/">Yedidey Hakfar HaYarok</a>
+                <a title="To Hakfar Hayarok site" href="http://www.kfaryarok.org.il/"><img src="/assets/img/backgrounds/icon.jpg" width="10%" height="8%" style="position: relative; right: 20%;"></a>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -19,18 +20,14 @@
                     <li><a href="/">Home</a></li>
                     <script>
                     var extra = <%- JSON.stringify(extra)%>
-                    document.getElementById('navbar-items').innerHTML+=extra;
+                    document.getElementById('navbar-items').innerHTML += extra;
                      </script>
-                </ul>
-                <ul class="collapse nav navbar-nav nav-collapse" id="nav-collapse1">
-                    <li><a href="#">Web design</a></li>
-                    <li><a href="#">Development</a></li>
-                    <li><a href="#">Graphic design</a></li>
-                    <li><a href="#">Print</a></li>
-                    <li><a href="#">Motion</a></li>
-                    <li><a href="#">Mobile apps</a></li>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav><!-- /.navbar -->
 </div><!-- /.container-fluid -->
+
+<script>
+$('#popoverHakfarHayarok').popover();
+</script>
