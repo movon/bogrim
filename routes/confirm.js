@@ -6,7 +6,6 @@ var express = require('express');
 var router = express.Router();
 var ejs = require('ejs');
 var mysql = require('mysql');
-var crypto = require('crypto');
 
 var firstName;
 var lastName;
@@ -17,10 +16,10 @@ router.get('/', function(req, res, next) {
     var lastName = req.query.lastName;
     var hashedpass = req.query.hashedpass;
     var salt = req.query.salt;
-    var newEmail = firstName.substring(0, firstName.index(' ')) + lastName[0] + '@kfar-yedidim.com';
+    var newEmail = firstName.substring(0, firstName.indexOf(' ')) + lastName[0] + '@kfar-yedidim.com';
     res.render('confirm', { title: 'Express', firstName: firstName,
         lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
-        hashedpass: hashedpass, salt: salt, failed: false, success: false });
+        hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: '' });
 });
 
 router.post('/', function(req,res, next) {
@@ -41,7 +40,12 @@ router.post('/', function(req,res, next) {
     var hashedpass = req.body.userPassword;
     var salt = req.body.salt;
 
-    if (password == process.env.shiraz_password || password == 307345462) {
+
+    if (password == process.env.shiraz_password) {
+        var queryString_checkUsername = 'SELECT * FROM ' + process.env.dbname
+            + ' WHERE Username = ' + connection.escape(connection.escape(firstName + lastName[0]));
+
+
         var queryString = 'INSERT INTO ' + process.env.dbname + '.' + process.env.tablename +
             '(Fname, Lname, FakeEmail, RealEmail, pass, Salt, Username) VALUES('
             + connection.escape(firstName) + ', '
@@ -66,7 +70,13 @@ router.post('/', function(req,res, next) {
     }
     else {
         //nope
-        res.render('index', {title: 'Express', failed: false, success: true});
+        //res.end();
+        var errorMsg = 'Invalid admin password';
+        res.render('confirm', { title: 'Express', firstName: firstName,
+            lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
+            hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg});
+        //res.render('index', {title: 'Express', failed: false, success: true});
+        //res.render('confirmResults', {title: 'Express', errorMessage: errorMsg });
     }
 
 });
