@@ -88,7 +88,7 @@ getExtra = function(req) {
   else {
     xtra += '<li><a href="/register">Register</a></li>';
     xtra += '<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">' +
-        '<p style="display: inline">Log in</p><i class="glyphicon glyphicon-log-in" style="padding-top: 10%"></i></button>';
+        '<p style="display: inline; padding-right:10%">Log in</p><i class="glyphicon glyphicon-log-in" style="padding-top: 10%;"></i></button>';
   }
 
   return xtra;

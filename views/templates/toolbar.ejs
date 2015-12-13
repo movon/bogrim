@@ -18,16 +18,21 @@
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" id="navbar-items">
                     <li><a href="/">Home</a></li>
+                    <li>
+                      <span class="li-social">
+                          <a href="https://www.facebook.com/pages/HaKfar-HaYarok/128982473810745"><i class="fa fa-facebook"></i></a>
+                      </span>
+                    </li>
                     <script>
-                    var extra = <%- JSON.stringify(extra)%>
-                    document.getElementById('navbar-items').innerHTML += extra;
-                     </script>
+                        var extra = <%- JSON.stringify(extra)%>
+                        document.getElementById('navbar-items').innerHTML += extra;
+                    </script>
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
     </nav><!-- /.navbar -->
 </div><!-- /.container-fluid -->
 
-<script>
+<!-- <script>
 $('#popoverHakfarHayarok').popover();
-</script>
+</script> -->
