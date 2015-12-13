@@ -83,8 +83,8 @@ router.post('/', function(req,res, next) {
             '(Fname, Lname, FakeEmail, RealEmail, pass, Salt, Username) VALUES('
             + connection.escape(firstName) + ', '
             + connection.escape(lastName) + ', '
-            + connection.escape(oldEmail) + ', '
             + connection.escape(newEmail) + ', '
+            + connection.escape(oldEmail) + ', '
             + connection.escape(hashedpass) + ', '
             + connection.escape(salt) + ', '
             + connection.escape(firstName + lastName[0]) + ')';
@@ -95,7 +95,9 @@ router.post('/', function(req,res, next) {
             console.log(result);
         });
 
-
+        var params = {
+            EmailAddress: oldEmail /* required */
+        };
         ses.verifyEmailAddress(params, function(err, data) {
             if (err) console.log(err, err.stack); // an error occurred
             else     console.log(data);           // successful response
