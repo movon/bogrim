@@ -26,13 +26,10 @@ router.get('/', function(req, res) {
     var accepted = false;
 
     connection.query(queryString, function(err, result){
-        console.log('result: ' + result);
         if (result && result.length > 0) {
             var salt = result[0].Salt;
             var saltpassword = password + salt;
             var hashedPassword = crypto.createHash('md5').update(saltpassword).digest('hex');
-            console.log(saltpassword);
-            console.log('hashed:' + hashedPassword);
             accepted = result[0].Pass == hashedPassword;
             if (accepted) {
                 res.write('Accepted');

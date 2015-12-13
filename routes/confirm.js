@@ -8,6 +8,9 @@ var ejs = require('ejs');
 var mysql = require('mysql');
 var validator = require("email-validator");
 var aws = require('aws-sdk');
+var nodemailer = require('nodemailer');
+
+
 aws.config.region = 'us-west-2';
 var ses = new aws.SES();
 
@@ -43,7 +46,6 @@ router.post('/', function(req,res, next) {
             database: process.env.dbname
         }
     );
-    console.log(req.body);
     var password = req.body.password;
     var oldEmail = req.body.oldEmail;
     var newEmail = req.body.newEmail;
@@ -60,6 +62,7 @@ router.post('/', function(req,res, next) {
         return;
     }
 
+    var userName = newEmail.substring(0, newEmail.indexOf('@'));
 
     var sentResponse = false;
     if (password == process.env.shirazpassword) {
@@ -88,12 +91,10 @@ router.post('/', function(req,res, next) {
             + connection.escape(oldEmail) + ', '
             + connection.escape(hashedpass) + ', '
             + connection.escape(salt) + ', '
-            + connection.escape(firstName + lastName[0]) + ')';
+            + connection.escape(userName) + ')';
 
-        console.log(queryString);
 
         connection.query(queryString, function(err, result){
-            console.log(result);
         });
 
         var params = {
@@ -101,13 +102,46 @@ router.post('/', function(req,res, next) {
         };
         ses.verifyEmailAddress(params, function(err, data) {
             if (err) console.log(err, err.stack); // an error occurred
-            else     console.log(data);           // successful response
         });
 
 
         // Send him an email: Congratulations {username}
         // You have been confirmed and are now registered to yedidey hakfar.
         // your email is {email}
+
+
+        var mailOptions = {
+            from: 'Registration-Bot<' + process.env.email_username + '>', // sender address
+            to: oldEmail, // list of receivers
+            subject: 'Congratulations ' + firstName + ' ' + lastName + ', You just joined Yedidey Hakfar!', // Subject line
+            text: 'Hello ' + firstName + ' ' + lastName + ', we are very happy to congratulate you for joining Yedidey Hakfar Hayarok!' +
+            '\nYour application has been reviewed and accepted. This means you are officially a part of us (If you would like, of course :) )' +
+            '\nWe opened an email address for you at ' + newEmail + '.' +
+            '\nIn order for you to be able to use it, please open the email you recieved from Amazon Web Services,' +
+            '\nAnd open the link attached to verify the email.' +
+            '\nOnce you do that, you are ready and set to use your new email.' +
+            '\nYou don\'t even have to log into it, just start sending emails to your friends who are also in Kfar Yedidim.' +
+            '\nWhen you send an email from this address you are using now (' + oldEmail + ')to a @kfar-yedidim.com address,' +
+            '\nit will automatically be seen as if it was sent by "' + newEmail + '".' +
+            '\nTo see all the email addresses and names of Yedidey Hakfar, you can log into our website at http://www.kfar-yedidim.com' +
+            '\nAnd login with ' + userName + ' as your username, and use the password you inserted when you registered.'
+        };
+
+        // create reusable transporter object using SMTP transport
+        var transporter = nodemailer.createTransport("SMTP", {
+            service: 'Gmail',
+            auth: {
+                user: process.env.email_username,
+                pass: process.env.email_password
+            }
+        });
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, function(error){
+            if(error) {
+                return console.log(error);
+            }
+        });
 
         res.redirect('/');
     }
