@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
     var newEmail = firstName + lastName[0] + '@kfar-yedidim.com';
     res.render('confirm', { title: 'Express', firstName: firstName,
         lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
-        hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: '' });
+        hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: '' , extra: getExtra()});
 });
 
 router.post('/', function(req,res, next) {
@@ -48,7 +48,7 @@ router.post('/', function(req,res, next) {
         errorMsg = 'Email is not valid. check that it doesn\'t contain hebrew letters';
         res.render('confirm', { title: 'Express', firstName: firstName,
             lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
-            hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg});
+            hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg, extra: getExtra(req)});
         return;
     }
 
@@ -63,7 +63,7 @@ router.post('/', function(req,res, next) {
                 errorMsg = 'Email already taken.';
                 res.render('confirm', { title: 'Express', firstName: firstName,
                     lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
-                    hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg});
+                    hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg, extra: getExtra(req)});
                 sentResponse = true;
             }
         });
@@ -100,7 +100,7 @@ router.post('/', function(req,res, next) {
         var errorMsg = 'Invalid admin password';
         res.render('confirm', { title: 'Express', firstName: firstName,
             lastName: lastName, oldEmail: oldEmail, newEmail: newEmail,
-            hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg});
+            hashedpass: hashedpass, salt: salt, failed: false, success: false, errorMsg: errorMsg, extra: getExtra(req)});
         //res.render('index', {title: 'Express', failed: false, success: true});
         //res.render('confirmResults', {title: 'Express', errorMessage: errorMsg });
     }
@@ -109,13 +109,6 @@ router.post('/', function(req,res, next) {
 
 module.exports = router;
 
-
-
-
-function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}
 
 
 

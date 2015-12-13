@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
               userTable += '</tr>';
           }
       }
-      res.render('users', { title: 'express', userTable: userTable });
+      res.render('users', { title: 'express', userTable: userTable, extra: getExtra(req)});
     });
 
   //}

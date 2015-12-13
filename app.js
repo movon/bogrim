@@ -75,16 +75,19 @@ app.use(function(err, req, res, next) {
   });
 });
 
-getExtra = function() {
+getExtra = function(req) {
+  'use strict';
   var xtra = '';
 
+  // If logged in
   if (req.session.userName) {
-    //give him logout button
-    //give him /users page
+    xtra += '<li><a href="/users">Members</a></li>';
+    xtra += '<li><a href="/logut">Logout</a></li>';
   }
   else {
-    //give him register
-    //give him login
+    xtra += '<li><a href="/register">Register</a></li>';
+    xtra += '<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">' +
+        '<p style="display: inline">Log in</p><i class="glyphicon glyphicon-log-in" style="padding-top: 10%"></i></button>';
   }
 
   return xtra;

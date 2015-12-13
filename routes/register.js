@@ -3,7 +3,7 @@ var router = express.Router();
 var crypto = require('crypto');
 
 router.get('/', function(req, res, next) {
-    res.render('register', { title: 'Express' });
+    res.render('register', { title: 'Express' , extra: getExtra(req)});
 });
 
 router.post('/', function(req, res, next) {
@@ -85,7 +85,7 @@ router.post('/', function(req, res, next) {
     });
 
 
-    res.render('index', { title: 'Express' });
+    res.render('index', { title: 'Express', extra: getExtra(req) });
 });
 
 module.exports = router;

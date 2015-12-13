@@ -7,7 +7,7 @@ var mysql = require('mysql');
 var crypto = require('crypto');
 
 /* GET home page. */
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
     var username = req.query.username;
     var password = req.query.password;
     //stuff with sql
