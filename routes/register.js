@@ -90,7 +90,7 @@ router.post('/', function(req, res, next) {
     });
 
 
-    res.render('index', { title: 'Express', extra: getExtra(req) });
+    res.render('thanks', { title: 'Express', extra: getExtra(req) });
 });
 
 module.exports = router;

@@ -174,12 +174,7 @@
 
 <script>
   function thanks() {
-  $("#myModal").modal({backdrop: "true"});
-    return validateEmail(document.getElementById('form-email').value);
-  }
-  function validateEmail(email) {
-    var re = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
-    return re.test(email);
+    setTimeout(function() { $("#myModal").modal({backdrop: "true"});}, 500)
   }
 
   $(function(){
