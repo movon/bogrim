@@ -13,10 +13,10 @@ def real_to_fake(real_email, con):
     #replace fake_email's value with the value extracted from the db
     #fake_email = "danieleliad@kfar-yedidim.com"#just for now
     cur = con.cursor()
-    query = "SELECT FakeEmail FROM Users WHERE RealEmail='%s'"
+    query = "SELECT FakeEmail FROM Users WHERE RealEmail=%s"
     params = (real_email,)
     cur.execute(query, params)
-    fake_email = str(list(cur)[0])
+    fake_email = list(cur)[0][0]
     cur.close()
     return fake_email
 def full_real_to_fake(real_email, con):
@@ -27,10 +27,10 @@ def fake_to_real(fake_email, con):
     #replace real_email's value with the value extracted from the db
     #real_email = "daniel@melig.co.il"#just for now
     cur = con.cursor()
-    query = "SELECT RealEmail FROM Users WHERE FakeEmail='%s'"
+    query = "SELECT RealEmail FROM Users WHERE FakeEmail=%s"
     params = (fake_email,)
     cur.execute(query, params)
-    real_email = str(list(cur)[0])
+    real_email = list(cur)[0][0]
     cur.close()
     return real_email
 def lambda_handler(event, context):
@@ -50,26 +50,30 @@ def lambda_handler(event, context):
             print(err)
         #context.fail ?
         return "Request Failed :("
-    
-    email = event["Records"][0]["ses"]["mail"]
-    recipients = event["Records"][0]["ses"]["receipt"]["recipients"]
-    real_sender = email["commonHeaders"]["from"][0]
-    fake_sender = full_real_to_fake(real_sender, con)
-    real_forward_emails = []
-    for fake_email_recipient in recipients:
-        real_forward_emails.append(fake_to_real(fake_email_recipient, con))
-    
-    key = event["Records"][0]["ses"]["mail"]["messageId"]
-    data = s3_client.get_object(
-        Bucket='kfar-yedidim-emails',
-        Key=key
-    )
-    
-    message = data["Body"].read()
-    message = re.sub(r"^From: (.*)","From: " + fake_sender,message,flags=re.MULTILINE)
-    message = re.sub(r"^Return-Path: (.*)","Return-Path: " + fake_sender[fake_sender.index("<"):fake_sender.index(">")+1], message,flags = re.MULTILINE)
-    
-    print(real_forward_emails)
+    try:
+        email = event["Records"][0]["ses"]["mail"]
+        recipients = event["Records"][0]["ses"]["receipt"]["recipients"]
+        real_sender = email["commonHeaders"]["from"][0]
+        fake_sender = full_real_to_fake(real_sender, con)
+        real_forward_emails = []
+        for fake_email_recipient in recipients:
+            real_forward_emails.append(fake_to_real(fake_email_recipient, con))
+        
+        key = event["Records"][0]["ses"]["mail"]["messageId"]
+        data = s3_client.get_object(
+            Bucket='kfar-yedidim-emails',
+            Key=key
+        )
+        
+        message = data["Body"].read()
+        message = re.sub(r"^From: (.*)","From: " + fake_sender,message,flags=re.MULTILINE)
+        message = re.sub(r"^Return-Path: (.*)","Return-Path: " + fake_sender[fake_sender.index("<"):fake_sender.index(">")+1], message,flags = re.MULTILINE)
+        
+        print(real_forward_emails)
+    except Exception as e:
+        print(e)
+        #context.fail ?
+        return "Request Failed :("
     try:
         client.send_raw_email(
             Destinations = real_forward_emails,
