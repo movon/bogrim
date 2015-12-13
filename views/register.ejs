@@ -150,13 +150,52 @@
   <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
-        <div class="modal-header" style="padding-bottom:5%">
-          <h4 class="modal-title" style="direction: rtl; float:right; padding-bottom: 10%;">ההרשמה נכשלה</h4>
+        <div class="modal-header">
+          <h4 class="modal-title" style="direction: rtl; padding-bottom: 1%; font-size: 3em">ההרשמה נכשלה</h4>
         </div>
-        <div class="modal-body">
-          <p style=";line-height: 100%;float: right">וודא שרשמת הכל כדי שההרשמה תתקבל</p>
+        <div class="modal-body" style="text-align-all: right;">
+          <!--<p style="font-size: 2em;line-height: 100%;float: left!important; direction: rtl!important; " align="right" dir="rtl">וודא שרשמת הכל כדי שההרשמה תתקבל </p>-->
+          <p style="font-size: 2em; margin-bottom: 12%">אנא ודא שרשמת הכל על מנת שההרשמה תתקבל</p>
           <button type="button" class="btn btn-default" data-dismiss="modal">חזור</button>
-          <a href="/"><p style="display: inline">חזור לדף הבית   </p><i class="glyphicon glyphicon-home" style="padding-top: 10%"></i></a>
+          <!--<a href="/"><p style="display: inline">חזור לדף הבית   </p><i class="glyphicon glyphicon-home" style="padding-top: 10%"></i></a>-->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel" style="direction:rtl">כניסה</h4>
+        </div>
+
+        <div class="modal-body">
+          <form role="form" action="" method="post">
+            <div class="form-group">
+              <div class="input-group">
+                <input type="text" class="form-control" id="uLogin">
+                <label for="uLogin" class="input-group-addon glyphicon glyphicon-user"></label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-group">
+                <input type="password" class="form-control" id="uPassword">
+                <label for="uPassword" class="input-group-addon glyphicon glyphicon-lock"></label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="form-control btn btn-primary" onclick="clicked()"> כנס</button>
+
+        <div class="progress" style="display: none">
+          <div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="100" style="width: 0%;">
+            <span class="sr-only">progress</span>
+          </div>
         </div>
       </div>
     </div>
@@ -173,7 +212,7 @@
 
 <script>
   function thanks() {
-    setTimeout(function() { $("#myModal").modal({backdrop: "true"});}, 500)
+    setTimeout(function() { $("#myModal").modal({backdrop: "true"});}, 1000)
   }
 
   $(function(){

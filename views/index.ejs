@@ -51,7 +51,7 @@
        </div>
     </nav>
 
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -249,9 +249,6 @@
 
 
 
-
-
-
 <script src="assets/js/jquery-1.11.1.min.js"></script>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script src="assets/js/jquery.backstretch.min.js"></script>
@@ -261,30 +258,29 @@
 <script src="assets/js/placeholder.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    var ol = document.getElementById("gallery_mini");
-    var li;
-    var array = [];
-    for (var index = 0;index < 14;index++) {
-        li = document.createElement("li");
-        li.setAttribute("data-target","#myCarousel");
-        li.setAttribute("data-slide-to",String(index));
-        ol.appendChild(li);
-    }
-    ol.firstElementChild.setAttribute("class","active");
+    setTimeout(function() { var ol = document.getElementById("gallery_mini");
+        var li;
+        var array = [];
+        for (var index = 0;index < 14;index++) {
+            li = document.createElement("li");
+            li.setAttribute("data-target","#myCarousel");
+            li.setAttribute("data-slide-to",String(index));
+            ol.appendChild(li);
+        }
+        ol.firstElementChild.setAttribute("class","active");
 
-    var carousel_inner = document.getElementById("images");
-    for (var index = 1;index <= 14;index++) {
-        var div = document.createElement("div");
-        div.setAttribute("class", "item");
-        var image = new Image();
-        image.src="images/"+index+".JPG";
-        image.setAttribute("class","img-responsive");
-        image.setAttribute("alt","greenblitz");
-        div.appendChild(image);
-        carousel_inner.appendChild(div);
-    }
-    carousel_inner.firstElementChild.setAttribute("class", "item active");
-
+        var carousel_inner = document.getElementById("images");
+        for (var index = 1;index <= 14;index++) {
+            var div = document.createElement("div");
+            div.setAttribute("class", "item");
+            var image = new Image();
+            image.src="images/"+index+".JPG";
+            image.setAttribute("class","img-responsive");
+            image.setAttribute("alt","greenblitz");
+            div.appendChild(image);
+            carousel_inner.appendChild(div);
+        }
+        carousel_inner.firstElementChild.setAttribute("class", "item active"); }, 1000);
 </script>
 </body>
 
