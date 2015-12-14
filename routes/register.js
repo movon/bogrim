@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var crypto = require('crypto');
+var nodemailer = require('nodemailer');
+
 
 router.get('/', function(req, res, next) {
     res.render('register', { title: 'Express' , extra: getExtra(req)});
@@ -60,7 +62,6 @@ router.post('/', function(req, res, next) {
     console.log("here");
     console.log("Mail text: " + mailOptions.text);
 
-    var nodemailer = require('nodemailer');
 
     console.log(process.env.email_password);
     console.log(process.env.email_username);
