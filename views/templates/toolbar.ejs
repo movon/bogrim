@@ -17,16 +17,18 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right" id="navbar-items">
-                    <li><a href="/">Home</a></li>
-                    <!--<li>
+                    <li>
                       <span class="li-social">
-                          <a href="https://www.facebook.com/pages/HaKfar-HaYarok/128982473810745"><i class="fa fa-facebook"></i></a>
+                          <a href="https://www.facebook.com/pages/HaKfar-HaYarok/128982473810745"><i class="fa fa-facebook" style="font-size:200%;padding-top:20%"></i></a>
+                          <a href="https://www.facebook.com/pages/HaKfar-HaYarok/128982473810745"><i class="fa fa-youtube-square" style="font-size:200%;padding-top:20%;color:red"></i></a>
                       </span>
-                    </li>-->
+                    </li>
+                    <li><a href="/">Home</a>
                     <script>
                         var extra = <%- JSON.stringify(extra)%>
                         document.getElementById('navbar-items').innerHTML += extra;
                     </script>
+
                 </ul>
             </div><!-- /.navbar-collapse -->
         </div><!-- /.container -->
