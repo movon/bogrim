@@ -1,4 +1,4 @@
-The website of "Yedidey Hakfar Hayarok" organization.
+# "Yedidey Hakfar Hayarok" organization's website.
 We built it volunteeraly for our high school.
 The server and the database run on AWS, same as the email service which we use SES + lambda for capturing and sending emails. therefore emails are almost totally free instead of using a paid email service such as gmail for organizations.
 
